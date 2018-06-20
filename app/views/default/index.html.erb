@@ -3,6 +3,7 @@
   <% @pizzas.each do |p| %>
     <div class="col-md-3">
       <h2><%= p.name %></h2>
+      <%= link_to "Add to cart", default_cart_path(:pizza_id => p.id), class: 'btn btn-default'  %>
     </div>
   <% end %>
 </div>

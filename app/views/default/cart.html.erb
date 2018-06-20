@@ -1,0 +1,6 @@
+<h1>My Cart</h1>
+<div class="row">
+  <% session[:cart].each do |p| %>
+    <%= p['name'] %>
+  <% end %>
+</div>

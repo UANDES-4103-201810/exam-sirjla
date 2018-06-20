@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'default#index'
+  get 'default/cart'
   resources :orders
   resources :deliveries
   resources :customers
