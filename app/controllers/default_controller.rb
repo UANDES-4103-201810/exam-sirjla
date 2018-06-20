@@ -18,4 +18,8 @@ class DefaultController < ApplicationController
       session[:cart] << Pizza.find(pizza)
     end
   end
+
+  def checkout
+
+  end
 end
