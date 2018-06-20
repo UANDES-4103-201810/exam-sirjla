@@ -57,25 +57,26 @@ recipe_list.each do |name, price|
   )
 end
 
+customer_list = [
+    [
+        'Joe',
+    ]
+]
+
+customers = []
+customer_list.each do |name|
+  customers <<  Customer.create(
+      name:name
+  )
+end
+
 pizzas = []
 
 pizzas <<  Pizza.create(
-    name: "Thick Pepperoni",
-    crust:crusts[0],
-    recipe:recipes[0]
-)
-pizzas <<  Pizza.create(
-    name: "Thick Italian",
-    crust:crusts[0],
-    recipe:recipes[1]
-)
-pizzas <<  Pizza.create(
-    crust:crusts[1],
     recipe:recipes[0],
-    name: "Thin Pepperoni"
+    name: "Pepperoni"
 )
 pizzas <<  Pizza.create(
-    crust:crusts[1],
     recipe:recipes[1],
-    name: "Thin Italian",
+    name: "Italian",
 )

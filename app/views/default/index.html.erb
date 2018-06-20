@@ -2,8 +2,13 @@
 <div class="row">
   <% @pizzas.each do |p| %>
     <div class="col-md-3">
+      <%= form_for :anything, url: default_cart_path, method: 'get' do |f| %>
       <h2><%= p.name %></h2>
-      <%= link_to "Add to cart", default_cart_path(:pizza_id => p.id), class: 'btn btn-default'  %>
+      <p><b>Base Price: </b><%= Pizza.get_price(p.id) %></p>
+      <%= select_tag "crust_id", options_from_collection_for_select(Crust.all, "id", "display_name"), class: "form-control" %>
+      <input type="hidden" id="pizza_id" name="pizza_id" value="<%= p.id %>">
+      <%= f.submit "Add to Cart" %>
+      <% end %>
     </div>
   <% end %>
 </div>

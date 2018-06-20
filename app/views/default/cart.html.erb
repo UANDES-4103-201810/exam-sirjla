@@ -1,8 +1,8 @@
 <h1>My Cart</h1>
 <div class="row">
   <ul>
-  <% session[:cart].each do |p| %>
-    <li><%= p['name'] %></li>
+  <% session[:cart].each_with_index do |p, i| %>
+    <li><b><%= p['name'] %></b>, <%= session[:crust][i]['kind'] %></li>
   <% end %>
   </ul>
   <%= link_to 'Checkout', default_checkout_path, class: 'btn btn-success' %>

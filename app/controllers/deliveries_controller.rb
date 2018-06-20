@@ -28,11 +28,10 @@ class DeliveriesController < ApplicationController
 
     respond_to do |format|
       if @delivery.save
-        format.html { redirect_to @delivery, notice: 'Delivery was successfully created.' }
-        format.json { render :show, status: :created, location: @delivery }
+        session[:delivery] = @delivery
+        format.html { redirect_to default_order_path, notice: 'Delivery was successfully created.' }
       else
-        format.html { render :new }
-        format.json { render json: @delivery.errors, status: :unprocessable_entity }
+        format.html { redirect_to root_path, notice: 'There was a problem creating your delivery.' }
       end
     end
   end
@@ -42,11 +41,9 @@ class DeliveriesController < ApplicationController
   def update
     respond_to do |format|
       if @delivery.update(delivery_params)
-        format.html { redirect_to @delivery, notice: 'Delivery was successfully updated.' }
-        format.json { render :show, status: :ok, location: @delivery }
+        format.html { redirect_to root_path, notice: 'Delivery was successfully updated.' }
       else
-        format.html { render :edit }
-        format.json { render json: @delivery.errors, status: :unprocessable_entity }
+
       end
     end
   end
@@ -56,7 +53,7 @@ class DeliveriesController < ApplicationController
   def destroy
     @delivery.destroy
     respond_to do |format|
-      format.html { redirect_to deliveries_url, notice: 'Delivery was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Delivery was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +66,6 @@ class DeliveriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def delivery_params
-      params.require(:delivery).permit(:address_1, :adress_2, :phone)
+      params.require(:delivery).permit(:address_1, :address_2, :phone)
     end
 end

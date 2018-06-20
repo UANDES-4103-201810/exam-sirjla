@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2018_06_20_190659) do
 
   create_table "deliveries", force: :cascade do |t|
     t.string "address_1"
-    t.string "adress_2"
+    t.string "address_2"
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 2018_06_20_190659) do
   create_table "order_pizzas", force: :cascade do |t|
     t.integer "order_id"
     t.integer "pizza_id"
+    t.integer "crust_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["crust_id"], name: "index_order_pizzas_on_crust_id"
     t.index ["order_id"], name: "index_order_pizzas_on_order_id"
     t.index ["pizza_id"], name: "index_order_pizzas_on_pizza_id"
   end
@@ -59,12 +61,10 @@ ActiveRecord::Schema.define(version: 2018_06_20_190659) do
   end
 
   create_table "pizzas", force: :cascade do |t|
-    t.integer "crust_id"
     t.integer "recipe_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["crust_id"], name: "index_pizzas_on_crust_id"
     t.index ["recipe_id"], name: "index_pizzas_on_recipe_id"
   end
 

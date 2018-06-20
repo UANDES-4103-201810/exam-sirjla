@@ -3,6 +3,7 @@ class CreateOrderPizzas < ActiveRecord::Migration[5.2]
     create_table :order_pizzas do |t|
       t.references :order, foreign_key: true
       t.references :pizza, foreign_key: true
+      t.references :crust, foreign_key: true
 
       t.timestamps
     end

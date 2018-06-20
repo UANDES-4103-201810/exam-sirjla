@@ -26,21 +26,17 @@
   </div>
   <div class="col-md-6">
     <h2>Delivery information</h2>
-    <%= form_for @delivery do |f| %>
+    <p><b>Address 1: </b><%= session[:delivery]['address_1'] %></p>
+    <p><b>Address 2: </b><%= session[:delivery]['address_2'] %></p>
+    <p><b>Phone: </b><%= session[:delivery]['phone'] %></p>
+    <h2>Payment</h2>
+    <%= form_for :anyone, url: default_create_order_path do |f| %>
       <div class="form-group">
-        <%= f.label :address_1 %>
-        <%= f.text_field :address_1, id: :delivery_address_1, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :address_2 %>
-        <%= f.text_field :address_2, id: :delivery_address_2, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :phone %>
-        <%= f.text_field :phone, id: :delivery_phone, class: "form-control" %>
+        <%= f.label :payment %>
+        <%= f.text_field :payment, id: :order_payment, class: "form-control" %>
       </div>
       <div class="actions">
-        <%= f.submit "Confirm", class: "btn btn-success" %>
+        <%= f.submit "Confirm Order", class: "btn btn-success" %>
       </div>
     <% end %>
   </div>
