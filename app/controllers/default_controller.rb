@@ -5,7 +5,7 @@ class DefaultController < ApplicationController
   end
 
   def cart
-    if session[:cart].empty?
+    if session[:cart].blank?
       session[:cart] = Array.new
       session[:crust] = Array.new
     end
@@ -38,8 +38,19 @@ class DefaultController < ApplicationController
            payment: params[:anyone][:payment],
            delivery: Delivery.find(session[:delivery]['id'])
     )
-    order.save
+    if order.save
+      session[:cart].each_with_index do |p, i|
+        OrderPizza.create(
+                      order: order,
+                      pizza: Pizza.find(p['id']),
+                      crust: Crust.find(session[:crust][i]['id'])
+        )
+      end
 
-    redirect_to root_path, notice: 'Order was successfully created.'
+      session.destroy
+      redirect_to root_path, notice: 'Order was successfully created.'
+    else
+      redirect_to root_path, notice: 'There was a problem with your order.'
+    end
   end
 end
